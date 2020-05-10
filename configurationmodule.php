@@ -23,16 +23,19 @@ class ConfigurationModule extends Module
      */
     public function install()
     {
+        
         return parent::install() && $this->_installTab();
+                
+        
     }
- 
+   
     /**
      * Désinstallation du module
      * @return boolean
      */
     public function uninstall()
     {
-        return parent::uninstall()  && $this->_uninstallTab();
+        return parent::uninstall()  && $this->_uninstallTab()  ;
     }
  
     /**
@@ -50,7 +53,7 @@ class ConfigurationModule extends Module
         $tab = new Tab();
         $tab->class_name = 'ConfigurationPanel';
         $tab->module = $this->name;
-        $tab->id_parent = (int)Tab::getIdFromClassName('AdminCatalog');
+        $tab->id_parent = (int)Tab::getIdFromClassName('DEFAULT');
         $tab->icon = 'settings_applications';
         $languages = Language::getLanguages();
         foreach ($languages as $lang) {
@@ -65,7 +68,30 @@ class ConfigurationModule extends Module
  
         return true;
     }
- 
+    
+
+        public function getHookController($hook_name)
+
+        {
+        // Inclusion du fichier du contrôleur
+        require_once(dirname(__FILE__).'/controllers/admin/'.$hook_name.'.php');
+        // Construction dynamique du nom du contrôleur
+        $controller_name = $this->name.$hook_name.'Controller';
+        // Instanciation du contrôleur
+        $controller = new $controller_name();
+        // Retourne le contrôleur
+        return $controller;
+
+        }
+
+    public function hookActionCustomerGridDefinitionModifier(array $params)
+
+    {
+
+    return $controller = $this->getHookController('ConfigurationPanel');
+
+    }
+    
     /**
      * Désinstallation du controller admin
      * @return boolean

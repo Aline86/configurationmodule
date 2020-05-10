@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+    <name>configurationmodule</name>
+    <displayName><![CDATA[Prestashop sample Module]]></displayName>
+    <version><![CDATA[0.1.1]]></version>
+    <description><![CDATA[Prestashop sample Module with front controller]]></description>
+    <author><![CDATA[Claire-Aline Haestie]]></author>
+    <tab><![CDATA[administration]]></tab>
+    <is_configurable>0</is_configurable>
+    <need_instance>0</need_instance>
+	<limited_countries></limited_countries>
+</module>
